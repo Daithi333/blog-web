@@ -1,0 +1,61 @@
+version: "3.9"
+
+x-blog-app-common:
+  &blog-app-common
+  build:
+    context: .
+    dockerfile: ./docker/Dockerfile
+  environment:
+    &blog-app-common-env
+    ENV: ${ENV:-development}
+    DB_HOST: blog-db
+    DB_PORT: 5432
+    DB_USER: ${DB_USER}
+    DB_PASSWORD: ${DB_PASSWORD}
+    DB_NAME: ${DB_NAME}
+  depends_on:
+    &blog-app-common-depends-on
+    blog-db:
+      condition: service_healthy
+
+services:
+  blog-db:
+    image: postgres:15
+    container_name: blog-db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - blog_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U blog" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  blog-db-migrate:
+    <<: *blog-app-common
+    container_name: blog-db-migrate
+    command: poetry run python src/manage.py migrate
+    depends_on:
+      <<: *blog-app-common-depends-on
+    environment:
+      <<: *blog-app-common-env
+
+  blog-app:
+    <<: *blog-app-common
+    container_name: blog-app
+    ports:
+      - "8000:8000"
+    depends_on:
+      <<: *blog-app-common-depends-on
+      blog-db-migrate:
+        condition: service_completed_successfully
+    environment:
+      <<: *blog-app-common-env
+
+volumes:
+  blog_data:

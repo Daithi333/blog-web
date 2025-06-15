@@ -1,0 +1,29 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Bytecode files
+*.pyo
+*.pyd
+
+# Env files
+.env
+venv/
+.env.local
+
+# PyCharm files
+.idea/
+*.iml
+
+# Coverage files
+.coverage
+htmlcov/
+.coveragerc
+
+# Django files
+db.sqlite3
+media/
+static/
+
+# OS
+.DS_Store
