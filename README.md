@@ -5,7 +5,7 @@ The project uses **Django**, **Postgres**, **pytest**, **coverage**, and **mypy-
 
 ---
 
-### 🟣 MyPy-Django Typing
+### MyPy-Django Typing
 
 To enable typings for your ORM and `User`:
 
@@ -19,7 +19,7 @@ plugins = mypy_django_plugin.main
 ignore_missing_imports = true
 ```
 
-### 🟣 Makefile Commands
+### Makefile Commands
 
 The following Makefile commands are available to streamline your workflow:
 

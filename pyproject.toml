@@ -1,19 +1,16 @@
-[project]
+[tool.poetry]
 name = "blog-web"
 version = "0.1.0"
 description = "Blog Webapp"
-authors = [
-    {name = "Your Name",email = "you@example.com"}
-]
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-    "django (>=5.2.3,<6.0.0)",
-    "gunicorn (>=23.0.0,<24.0.0)",
-    "psycopg2-binary (>=2.9.10,<3.0.0)",
-]
+package-mode = false
 
-[tool.poetry]
+[tool.poetry.dependencies]
+python = ">=3.12"
+django = ">=5.2.3,<6.0.0"
+gunicorn = ">=23.0.0,<24.0.0"
+psycopg2-binary = ">=2.9.10,<3.0.0"
+django-widget-tweaks = ">=1.5.0,<2.0.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.11.13"

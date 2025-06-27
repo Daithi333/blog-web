@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Logged Out - My Blog{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto text-center mt-10">
+    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100">You've been logged out</h2>
+    <p class="mt-4 text-gray-600 dark:text-gray-300">
+        <a href="{% url 'login' %}" class="text-blue-600 hover:underline">Log back in</a>
+    </p>
+</div>
+{% endblock %}

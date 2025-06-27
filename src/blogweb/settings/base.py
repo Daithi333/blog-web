@@ -6,6 +6,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "blogapp" / "static"]
 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-dev-secret-key")
 
 DEBUG = False
@@ -13,13 +16,14 @@ DEBUG = False
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    "blogapp",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "blogapp",
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
